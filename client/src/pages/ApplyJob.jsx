@@ -6,13 +6,13 @@ import { Upload } from "lucide-react";
 const ApplyJob = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
+
   const [resume, setResume] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ REQUIRED CHECK
     if (!resume) {
       alert("Please upload your resume (PDF)");
       return;
@@ -24,13 +24,9 @@ const ApplyJob = () => {
     try {
       setLoading(true);
 
-      const res = await API.post(
-        `/applications/apply/${jobId}`,
-        formData
-        // ❌ DO NOT set Content-Type manually
-      );
+      await API.post(`/applications/apply/${jobId}`, formData);
 
-      alert("Application submitted successfully");
+      alert("✅ Application submitted successfully");
       navigate("/my-applications");
 
     } catch (error) {
@@ -40,18 +36,6 @@ const ApplyJob = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-  API.get("/applications/my").then(res => {
-    const alreadyApplied = res.data.find(
-      app => app.job._id === jobId
-    );
-    if (alreadyApplied) {
-      alert("You have already applied for this job");
-      navigate("/jobs");
-    }
-  });
-}, [jobId]);
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded-xl">

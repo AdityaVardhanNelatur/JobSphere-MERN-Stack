@@ -12,14 +12,9 @@ const JobApplications = () => {
   }, []);
 
   const fetchApplications = async () => {
-    try {
-      const res = await API.get(`/applications/job/${jobId}`);
-      setApplications(res.data);
-    } catch (error) {
-      console.error("Failed to fetch applications", error);
-    } finally {
-      setLoading(false);
-    }
+    const res = await API.get(`/applications/job/${jobId}`);
+    setApplications(res.data);
+    setLoading(false);
   };
 
   const updateStatus = async (id, status) => {
@@ -31,33 +26,31 @@ const JobApplications = () => {
     );
   };
 
-  if (loading) return <p className="p-6">Loading applications...</p>;
+  if (loading) return <p className="p-6">Loading...</p>;
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Job Applications</h1>
 
-      {applications.length === 0 && (
-        <p>No applications for this job.</p>
-      )}
-
       {applications.map(app => (
-        <div
-          key={app._id}
-          className="border rounded p-4 mb-3 bg-white shadow"
-        >
+        <div key={app._id} className="border p-4 mb-4 rounded bg-white shadow">
           <p className="font-semibold">
             {app.applicant.name} ({app.applicant.email})
           </p>
 
-          <p className="mt-1">
-            Status:{" "}
-            <span className="font-bold uppercase">
-              {app.status}
-            </span>
-          </p>
+          <p>Status: <b>{app.status}</b></p>
 
-          <div className="mt-3 space-x-3">
+          {/* ✅ VIEW RESUME */}
+          <a
+            href={app.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline block mt-2"
+          >
+            View Resume (PDF)
+          </a>
+
+          <div className="mt-3 space-x-2">
             <button
               onClick={() => updateStatus(app._id, "shortlisted")}
               className="bg-green-600 text-white px-3 py-1 rounded"

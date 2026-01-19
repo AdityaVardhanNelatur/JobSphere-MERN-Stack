@@ -1,176 +1,83 @@
-🚀 JobSphere – Job Portal Web Application (MERN Stack)
+🚀 MERN Authentication System (User & Admin Roles)
 
-A full-stack Job Portal web application built using the MERN stack, designed to replicate a real-world hiring platform where job seekers can apply for jobs and admins can manage hiring workflows.
+A full-stack MERN application implementing JWT-based authentication, role-based authorization (User/Admin), protected routes, and a clean production-ready architecture.
 
+📌 Project Overview
 
-📌 Features
-👤 Job Seeker (User)
+This project demonstrates how authentication and authorization are handled in a real-world MERN stack application.
+A single login page is used to authenticate both users and admins, while access control is enforced based on roles stored in JWT tokens.
 
-User registration & login
+✨ Features
 
-Browse available job listings
+🔐 JWT-based authentication
+👤 Single login page for all users
+🛡️ Role-based authorization (User / Admin)
+🔒 Protected routes
+🚫 Admin-only routes
+🌐 RESTful API design
 
-View complete job details
+🏗️ Tech Stack
 
-Apply for jobs with resume upload
-
-Track application status:
-
-Pending
-
-Shortlisted
-
-Rejected
-
-Prevents re-applying to the same job
-
-Clear UI feedback for applied/rejected jobs
-
-🧑‍💼 Admin (Recruiter)
-
-Secure admin login
-
-Create, edit, close & delete job posts
-
-View applicants for each job
-
-Shortlist or reject candidates
-
-Admin dashboard with job statistics
-
-Role-based access control
-
-🛠️ Tech Stack
-Frontend
-
-React.js
-
-Vite
-
+*Frontend*
+React (Vite)
+React Router DOM
+Axios
 Tailwind CSS
 
-Lucide Icons
-
-React Router DOM
-
-Backend
-
+*Backend*
 Node.js
-
 Express.js
+MongoDB (MongoDB Atlas)
+JSON Web Tokens (JWT)
 
-MongoDB (Mongoose)
-
-JWT Authentication
-
-Multer (Resume uploads)
-
-🔐 Authentication & Security
-
-JWT-based authentication
-
-Role-based authorization (User / Admin)
-
-Protected routes for users and admins
-
-Secure resume uploads
-
-Environment variables for sensitive data 
-
-job-portal-mern/
-│
-├── client/                 # React Frontend
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── App.jsx
-│   └── package.json
-│
-├── server/                 # Node + Express Backend
+📁 Project Structure
+JobSphere/
+├── backend/
 │   ├── controllers/
+│   │   └── authController.js
 │   ├── models/
+│   │   └── User.js
 │   ├── routes/
+│   │   └── authRoutes.js
 │   ├── middleware/
-│   ├── utils/
+│   │   ├── authMiddleware.js
+│   │   └── adminMiddleware.js
+│   ├── config/
+│   │   └── db.js
 │   └── server.js
 │
-├── .gitignore
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   └── Login.jsx
+│   │   ├── components/
+│   │   │   ├── ProtectedRoute.jsx
+│   │   │   └── AdminRoute.jsx
+│   │   ├── utils/
+│   │   │   └── api.js
+│   │   └── App.jsx
+│   └── vite.config.js
+│
 └── README.md
 
- ⚙️ Installation & Setup
-1️⃣ Clone the Repository
-git clone https://github.com/AdityaVardhanNelatur/job-portal-mern.git
-cd job-portal-mern
+🔐 Authentication & Authorization Flow
 
-2️⃣ Backend Setup
-cd server
+User accesses /login
+Credentials are submitted
+Backend verifies user
+JWT token is generated with role information
+Token is stored on the client
+Protected routes are accessed based on role:
+User → User dashboard
+Admin → Admin dashboard
+
+▶️ Run the Project Locally
+*Backend Setup*
+cd backend
 npm install
+npm start
 
-
-Create a .env file inside server/:
-
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-EMAIL_USER=your_email
-EMAIL_PASS=your_email_password
-
-
-Run backend:
-
-npm run dev
-
-3️⃣ Frontend Setup
-cd client
+*Frontend Setup*
+cd frontend
 npm install
 npm run dev
-
-
-Frontend runs on:
-
-http://localhost:5173
-
-
-Backend runs on:
-
-http://localhost:5000
-
-🧪 Test Credentials (Optional)
-
-You can create:
-
-One Admin account
-
-Multiple User accounts
-
-(Admin creation is restricted to one account for security.)
-
- Screenshots:
-<img width="3200" height="2000" alt="Screenshot (250)" src="https://github.com/user-attachments/assets/1d88782d-544c-401f-8d53-59b101cd7686" />
-
-<img width="3200" height="2000" alt="Screenshot (251)" src="https://github.com/user-attachments/assets/cfb9ed45-e618-4d12-b937-327211cfafc8" />
-
-<img width="3200" height="2000" alt="Screenshot (252)" src="https://github.com/user-attachments/assets/d35e91ce-dd84-4f27-a189-ea5d912f7774" />
-
-<img width="3200" height="2000" alt="Screenshot (253)" src="https://github.com/user-attachments/assets/a3d0bd41-94b2-4e90-81e7-030d860bd9c5" />
-
-<img width="3200" height="2000" alt="Screenshot (254)" src="https://github.com/user-attachments/assets/794fcb18-3c5d-4870-a230-413aefb0869d" />
-
-<img width="3200" height="2000" alt="Screenshot (255)" src="https://github.com/user-attachments/assets/4cddd2cb-0100-4db6-af09-014372cc4761" />
-
-<img width="3200" height="2000" alt="Screenshot (258)" src="https://github.com/user-attachments/assets/b5cbf3f8-0dca-4133-94da-d94d4def992c" />
-
-<img width="3200" height="2000" alt="Screenshot (257)" src="https://github.com/user-attachments/assets/b5ef9e33-db18-487e-8a68-250c70f66f8d" />
-
-
-
-
-
-
-
-
-
-
-
-

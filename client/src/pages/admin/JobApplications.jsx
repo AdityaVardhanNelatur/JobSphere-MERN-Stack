@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../services/api";
+import toast from "react-hot-toast";
 
 const JobApplications = () => {
   const { jobId } = useParams();
@@ -22,34 +23,22 @@ const JobApplications = () => {
     }
   };
 
-  const updateStatus = async (id, status, name) => {
-    const confirmMessage =
-      status === "shortlisted"
-        ? `Are you sure you want to SHORTLIST ${name}?`
-        : `Are you sure you want to REJECT ${name}?`;
+  const updateStatus = async (id, status) => {
+  await API.put(`/applications/${id}/status`, { status });
 
-    // ✅ Confirmation popup
-    if (!window.confirm(confirmMessage)) return;
+  setApplications(prev =>
+    prev.map(app =>
+      app._id === id ? { ...app, status } : app
+    )
+  );
 
-    try {
-      await API.put(`/applications/${id}/status`, { status });
+  if (status === "shortlisted") {
+    toast.success("Candidate shortlisted 🎉");
+  } else {
+    toast.error("Candidate rejected ❌");
+  }
+};
 
-      setApplications(prev =>
-        prev.map(app =>
-          app._id === id ? { ...app, status } : app
-        )
-      );
-
-      // ✅ Success popup
-      alert(
-        status === "shortlisted"
-          ? `✅ ${name} has been shortlisted`
-          : `❌ ${name} has been rejected`
-      );
-    } catch (error) {
-      alert("❌ Failed to update application status");
-    }
-  };
 
   if (loading) return <p className="p-6">Loading...</p>;
 

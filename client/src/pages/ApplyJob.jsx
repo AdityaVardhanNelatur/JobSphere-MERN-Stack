@@ -1,20 +1,30 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
 import { Upload } from "lucide-react";
+import toast from "react-hot-toast";
 
 const ApplyJob = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
-
   const [resume, setResume] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    API.get("/applications/my").then(res => {
+      const alreadyApplied = res.data.find(app => app.job._id === jobId);
+      if (alreadyApplied) {
+        toast("You have already applied for this job");
+        navigate("/jobs");
+      }
+    });
+  }, [jobId, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!resume) {
-      alert("Please upload your resume (PDF)");
+      toast.error("Please upload your resume (PDF)");
       return;
     }
 
@@ -23,15 +33,11 @@ const ApplyJob = () => {
 
     try {
       setLoading(true);
-
       await API.post(`/applications/apply/${jobId}`, formData);
-
-      alert("✅ Application submitted successfully");
+      toast.success("Application submitted successfully 🎉");
       navigate("/my-applications");
-
-    } catch (error) {
-      console.error("Apply failed:", error);
-      alert(error.response?.data?.message || "Apply failed");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Application failed");
     } finally {
       setLoading(false);
     }
@@ -45,13 +51,11 @@ const ApplyJob = () => {
         <input
           type="file"
           accept=".pdf"
-          required
-          className="mb-4"
           onChange={(e) => setResume(e.target.files[0])}
+          className="mb-4"
         />
 
         <button
-          type="submit"
           disabled={loading}
           className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
         >

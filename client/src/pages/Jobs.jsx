@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { MapPin, IndianRupee, Briefcase } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -29,7 +30,7 @@ const Jobs = () => {
         message = "❌ Your application was rejected for this job.";
       }
 
-      alert(message);
+      toast(message);
       return;
     }
 

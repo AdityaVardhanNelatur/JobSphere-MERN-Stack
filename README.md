@@ -1,36 +1,93 @@
-🚀 MERN Authentication System (User & Admin Roles)
+🚀 JobSphere – MERN Authentication & Interview Management System
+JobSphere is a production-ready MERN stack application implementing JWT-based authentication, role-based authorization (User/Admin), protected routes, and an Admin Interview Scheduling workflow.
+This project reflects how authentication, authorization, and admin workflows are handled in real-world SaaS and enterprise applications.
 
-A full-stack MERN application implementing JWT-based authentication, role-based authorization (User/Admin), protected routes, and a clean production-ready architecture.
 
 📌 Project Overview
+JobSphere uses a single login system for both users and admins.
+Based on the role embedded inside the JWT token, users are redirected to appropriate dashboards with strict access control.
 
-This project demonstrates how authentication and authorization are handled in a real-world MERN stack application.
-A single login page is used to authenticate both users and admins, while access control is enforced based on roles stored in JWT tokens.
+Admins can:
+View job applications
+Schedule interviews
+Update application status
+Notify users about interview schedules
 
-✨ Features
+Users can:
+Register & login
+Apply for jobs
+Track application status
+View interview schedules (when assigned)
 
-🔐 JWT-based authentication
-👤 Single login page for all users
-🛡️ Role-based authorization (User / Admin)
-🔒 Protected routes
-🚫 Admin-only routes
-🌐 RESTful API design
+✨ Key Features
+🔐 Authentication & Authorization
+JWT-based authentication
+Single login page for User & Admin
+Role stored securely inside JWT
+Token-based session handling
+
+🛡️ Access Control
+Protected routes (logged-in users only)
+Admin-only routes
+Unauthorized access prevention
+
+🧑‍💼 Admin Interview Scheduling
+Admin can schedule interviews
+Interview status updates (Scheduled / Pending)
+“View Details” popup for interview information
+User receives interview schedule confirmation
+
+🌐 RESTful API
+Clean controller-service architecture
+Secure middleware-based authorization
+Scalable backend structure
 
 🏗️ Tech Stack
-
-*Frontend*
+Frontend
 React (Vite)
 React Router DOM
 Axios
 Tailwind CSS
 
-*Backend*
+Backend
 Node.js
 Express.js
 MongoDB (MongoDB Atlas)
 JSON Web Tokens (JWT)
 
-📁 Project Structure
+🔐 Authentication & Authorization Flow
+User/Admin accesses /login
+Credentials are submitted to backend
+Backend verifies credentials
+JWT token is generated with role information
+Token is stored on client (localStorage)
+Route access is controlled using middleware
+
+Role-Based Redirection
+User → User Dashboard
+Admin → Admin Dashboard
+
+🧑‍💼 Admin Interview Scheduling Flow
+Admin logs into dashboard
+Views list of job applications
+Schedules interview for a candidate
+Application status updates to Interview Scheduled
+User clicks View Details
+Popup message shows:
+Interview Scheduled – All the Best!
+
+▶️ Run the Project Locally
+
+Backend Setup
+cd backend
+npm install
+npm start
+
+Frontend Setup
+cd frontend
+npm install
+npm run dev 
+
 JobSphere/
 ├── backend/
 │   ├── controllers/
@@ -59,25 +116,3 @@ JobSphere/
 │   └── vite.config.js
 │
 └── README.md
-
-🔐 Authentication & Authorization Flow
-
-User accesses /login
-Credentials are submitted
-Backend verifies user
-JWT token is generated with role information
-Token is stored on the client
-Protected routes are accessed based on role:
-User → User dashboard
-Admin → Admin dashboard
-
-▶️ Run the Project Locally
-*Backend Setup*
-cd backend
-npm install
-npm start
-
-*Frontend Setup*
-cd frontend
-npm install
-npm run dev

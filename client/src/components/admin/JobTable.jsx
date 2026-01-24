@@ -9,7 +9,7 @@ const JobTable = ({ jobs, onCreate, onEdit, refresh }) => {
     <div className="bg-white rounded-xl shadow p-4">
       <div className="flex justify-between mb-4">
         <h2 className="text-xl font-semibold">Manage Jobs</h2>
-        <button onClick={onCreate} className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded">
+        <button onClick={onCreate} className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded ease-in-out cursor-pointer ">
           <Plus size={18} /> Create Job
         </button>
       </div>

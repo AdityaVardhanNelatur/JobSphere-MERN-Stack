@@ -87,7 +87,7 @@ const JobFormModal = ({ job, close, refresh }) => {
           <div className="flex gap-3 mt-4">
             <button
               type="submit"
-              className="flex-1 bg-blue-600 text-white py-2 rounded-lg"
+              className="flex-1 bg-blue-600 text-white py-2 rounded-lg ease-in-out cursor-pointer"
             >
               Save Job
             </button>
@@ -95,7 +95,7 @@ const JobFormModal = ({ job, close, refresh }) => {
             <button
               type="button"
               onClick={close}
-              className="flex-1 border py-2 rounded-lg"
+              className="flex-1 border py-2 rounded-lg ease-in-out cursor-pointer"
             >
               Cancel
             </button>

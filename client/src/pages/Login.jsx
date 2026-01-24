@@ -53,7 +53,7 @@ const Login = () => {
           required
         />
 
-        <button className="bg-green-600 text-white px-4 py-2 w-full">
+        <button className="bg-green-600 text-white px-4 py-2 w-full ease-in-out cursor-pointer hover:bg-green-700 transition">
           Login
         </button>
       </form>

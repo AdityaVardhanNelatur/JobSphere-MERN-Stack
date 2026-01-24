@@ -47,6 +47,7 @@ const Navbar = () => {
           onClick={handleLogoClick}
           className="flex items-center gap-2 text-blue-600 font-bold text-xl cursor-pointer"
         >
+          <link rel="icon" type="image/svg+xml" href="/find-job.svg" />
           <Briefcase size={22} />
           JobSphere
         </div>
